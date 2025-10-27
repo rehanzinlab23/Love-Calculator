@@ -3,54 +3,107 @@ function calculateLove() {
   const partnerName = document.getElementById("partnerName").value.trim().toLowerCase();
   const result = document.getElementById("result");
 
-  // Check if empty
+  document.querySelectorAll(".floating-heart").forEach(h => h.remove());
+  document.querySelectorAll(".floating-skull").forEach(h => h.remove());
+
   if (!yourName || !partnerName) {
-    result.style.display = "block";
-    result.innerHTML = "💬 Please enter both names!";
-    return;
+    return showResult("💬 Please enter both names!");
   }
 
-  //  Prevent numbers-only inputs
-  const nameRegex = /^[a-zA-Z\s]+$/; 
+  const nameRegex = /^[a-zA-Z\s]+$/;
   if (!nameRegex.test(yourName) || !nameRegex.test(partnerName)) {
-    result.style.display = "block";
-    result.innerHTML = "⚠️ Please enter valid names — numbers or symbols are not allowed!";
-    return;
+    return showResult("⚠️ Please enter valid names — numbers or symbols are not allowed!");
   }
 
-  const combo = [yourName, partnerName].sort().join("");
-  const specialCombo = ["rehan", "zunaira"].sort().join("");
-  if (combo === specialCombo) {
-    result.style.display = "block";
-    result.innerHTML = `
+  // Make order-independent string (remove spaces too)
+  const combo = [yourName.replace(/\s+/g, ""), partnerName.replace(/\s+/g, "")]
+    .sort()
+    .join("");
+
+  const specialCombo99 = ["rehan", "zunaira"].sort().join("");
+  const specialCombo0  = ["farhan", "mahnoor"].sort().join("");
+
+  if (combo === specialCombo99) {
+    createFloatingHearts();
+    return showResult(`
       💞 ${yourName.toUpperCase()} ❤️ ${partnerName.toUpperCase()} <br>
       Compatibility: <strong>99%</strong> 💖<br>
       🌹 A destined match written in the stars! 🌹
-    `;
-    return;
+    `);
+  }
+
+  if (combo === specialCombo0) {
+    createFloatingSkulls()
+    return showResult(`
+       ${yourName.toUpperCase()} & ${partnerName.toUpperCase()} <br>
+      Compatibility: <strong>0%</strong>💀<br>
+      🚫 Some connections are just not meant to be...
+    `);
   }
 
   if (yourName === partnerName) {
-    result.style.display = "block";
-    result.innerHTML = `
+    createFloatingHearts();
+    return showResult(`
       💖 ${yourName.toUpperCase()} truly loves themselves! <br>
       Compatibility: <strong>100%</strong> ❤️
-    `;
-    return;
+    `);
   }
 
-  const combined = [yourName, partnerName].sort().join("");
+  const combined = combo;
   let hash = 0;
   for (let i = 0; i < combined.length; i++) {
     hash = combined.charCodeAt(i) + ((hash << 5) - hash);
     hash |= 0;
   }
+  const lovePercent = 50 + Math.abs(hash % 51);
 
-  const lovePercent = 50 + Math.abs(hash % 21);
-
-  result.style.display = "block";
-  result.innerHTML = `
+  createFloatingHearts();
+  showResult(`
     💞 ${yourName.toUpperCase()} ❤️ ${partnerName.toUpperCase()} <br>
     Compatibility: <strong>${lovePercent}%</strong>
-  `;
+  `);
+}
+
+function showResult(html) {
+  const result = document.getElementById("result");
+  result.style.display = "block";
+  result.innerHTML = html;
+}
+
+// createFloatingHearts()
+
+function createFloatingHearts() {
+  for (let i = 0; i < 10; i++) {
+    const heart = document.createElement("div");
+    heart.classList.add("floating-heart");
+    heart.innerHTML = "💖";
+    document.body.appendChild(heart);
+
+    const x = Math.random() * window.innerWidth;
+    const duration = 3 + Math.random() * 2;
+
+    heart.style.left = `${x}px`;
+    heart.style.animationDuration = `${duration}s`;
+
+    setTimeout(() => heart.remove(), duration * 2000);
+  }
+}
+
+// createFloatingSkulls()
+
+function createFloatingSkulls() {
+  for (let i = 0; i < 10; i++) {
+      const skull = document.createElement("div");
+    skull.classList.add("floating-heart");
+    skull.innerHTML = "💀";
+    document.body.appendChild(skull);
+
+    const x = Math.random() * window.innerWidth;
+    const duration = 3 + Math.random() * 2;
+
+    skull.style.left = `${x}px`;
+    skull.style.animationDuration = `${duration}s`;
+
+    setTimeout(() => skull.remove(), duration * 2000);
+  }
 }

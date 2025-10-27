@@ -89,10 +89,56 @@ button:hover {
      display: none;
      animation: fadeIn 1s ease;
      overflow-wrap: break-word;
-     /* ✅ Result text wraps properly */
      word-wrap: break-word;
      text-align: center;
 }
+
+/* Floating Hearts */
+
+.floating-heart {
+     position: fixed;
+     bottom: 0;
+     font-size: 24px;
+     animation: floatUp ease-in forwards;
+     pointer-events: none;
+     opacity: 0.8;
+}
+
+@keyframes floatUp {
+     0% {
+          transform: translateY(0) scale(1);
+          opacity: 1;
+     }
+
+     100% {
+          transform: translateY(-120vh) scale(1.5);
+          opacity: 0;
+     }
+}
+
+/* Floating Skulls */
+
+.floating-skull {
+     position: fixed;
+     bottom: 0;
+     font-size: 24px;
+     animation: floatUp ease-in forwards;
+     pointer-events: none;
+     opacity: 0.8;
+}
+
+@keyframes floatUp {
+     0% {
+          transform: translateY(0) scale(1);
+          opacity: 1;
+     }
+
+     100% {
+          transform: translateY(-120vh) scale(1.5);
+          opacity: 0;
+     }
+}
+
 
 @keyframes fadeIn {
      from {
@@ -105,6 +151,8 @@ button:hover {
           transform: translateY(0);
      }
 }
+
+/* Responsive */
 
 @media (max-width: 480px) {
      h1 {
