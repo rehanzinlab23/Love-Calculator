@@ -3,9 +3,18 @@ function calculateLove() {
   const partnerName = document.getElementById("partnerName").value.trim().toLowerCase();
   const result = document.getElementById("result");
 
+  // Check if empty
   if (!yourName || !partnerName) {
     result.style.display = "block";
     result.innerHTML = "💬 Please enter both names!";
+    return;
+  }
+
+  //  Prevent numbers-only inputs
+  const nameRegex = /^[a-zA-Z\s]+$/; 
+  if (!nameRegex.test(yourName) || !nameRegex.test(partnerName)) {
+    result.style.display = "block";
+    result.innerHTML = "⚠️ Please enter valid names — numbers or symbols are not allowed!";
     return;
   }
 
@@ -21,7 +30,6 @@ function calculateLove() {
     return;
   }
 
-  // Same-name case → 100%
   if (yourName === partnerName) {
     result.style.display = "block";
     result.innerHTML = `
@@ -32,16 +40,14 @@ function calculateLove() {
   }
 
   const combined = [yourName, partnerName].sort().join("");
-
   let hash = 0;
   for (let i = 0; i < combined.length; i++) {
     hash = combined.charCodeAt(i) + ((hash << 5) - hash);
     hash |= 0;
   }
 
-  const lovePercent = 50 + Math.abs(hash % 51);
+  const lovePercent = 50 + Math.abs(hash % 21);
 
-  // Show result
   result.style.display = "block";
   result.innerHTML = `
     💞 ${yourName.toUpperCase()} ❤️ ${partnerName.toUpperCase()} <br>
