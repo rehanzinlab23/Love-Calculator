@@ -24,6 +24,8 @@ function calculateLove() {
   const specialCombo99 = ["rehan", "zunaira"].sort().join("");
   const specialCombo0 = ["farhan", "mahnoor"].sort().join("");
   const specialCombo01 = ["fatima", "sarim"].sort().join("");
+  const specialCombo02 = ["usman", "zunaira"].sort().join("");
+  const specialCombo03 = ["umair", "zunaira"].sort().join("");
 
   if (combo === specialCombo99) {
     createFloatingHearts();
@@ -49,6 +51,24 @@ function calculateLove() {
        ${yourName.toUpperCase()} & ${partnerName.toUpperCase()} <br>
       Compatibility: <strong>0%</strong>💀<br>
       🚫 Some connections are just not meant to be...
+    `);
+  }
+
+  if (combo === specialCombo02) {
+    createFloatingSkulls()
+    return showResult(`
+       ${yourName.toUpperCase()} & ${partnerName.toUpperCase()} <br>
+      Compatibility: <strong>0%</strong>💀<br>
+      🚫 Some connections are just not meant to be...
+    `);
+  }
+
+  if (combo === specialCombo03) {
+    createFloatingLaugh()
+    return showResult(`
+       ${yourName.toUpperCase()} & ${partnerName.toUpperCase()} <br>
+      Compatibility: <strong>0%</strong>😂<br>
+     Khwab mei bh moto sy pyar ni ho skta! 😂
     `);
   }
 
@@ -107,6 +127,25 @@ function createFloatingSkulls() {
     const skull = document.createElement("div");
     skull.classList.add("floating-heart");
     skull.innerHTML = "💀";
+    document.body.appendChild(skull);
+
+    const x = Math.random() * window.innerWidth;
+    const duration = 3 + Math.random() * 2;
+
+    skull.style.left = `${x}px`;
+    skull.style.animationDuration = `${duration}s`;
+
+    setTimeout(() => skull.remove(), duration * 2000);
+  }
+}
+
+//  createFloatingLaugh()
+
+function createFloatingLaugh() {
+  for (let i = 0; i < 10; i++) {
+    const skull = document.createElement("div");
+    skull.classList.add("floating-heart");
+    skull.innerHTML = "😂";
     document.body.appendChild(skull);
 
     const x = Math.random() * window.innerWidth;
