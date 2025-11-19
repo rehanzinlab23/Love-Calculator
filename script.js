@@ -16,18 +16,20 @@ function calculateLove() {
   }
 
   // Make order-independent string (remove spaces too)
+
   const combo = [yourName.replace(/\s+/g, ""), partnerName.replace(/\s+/g, "")]
     .sort()
     .join("");
 
   const specialCombo99 = ["rehan", "zunaira"].sort().join("");
-  const specialCombo0  = ["farhan", "mahnoor"].sort().join("");
+  const specialCombo0 = ["farhan", "mahnoor"].sort().join("");
+  const specialCombo01 = ["fatima", "sarim"].sort().join("");
 
   if (combo === specialCombo99) {
     createFloatingHearts();
     return showResult(`
       💞 ${yourName.toUpperCase()} ❤️ ${partnerName.toUpperCase()} <br>
-      Compatibility: <strong>99%</strong> 💖<br>
+      Compatibility: <strong>100%</strong> 💖<br>
       🌹 A destined match written in the stars! 🌹
     `);
   }
@@ -41,10 +43,19 @@ function calculateLove() {
     `);
   }
 
+  if (combo === specialCombo01) {
+    createFloatingSkulls()
+    return showResult(`
+       ${yourName.toUpperCase()} & ${partnerName.toUpperCase()} <br>
+      Compatibility: <strong>0%</strong>💀<br>
+      🚫 Some connections are just not meant to be...
+    `);
+  }
+
   if (yourName === partnerName) {
     createFloatingHearts();
     return showResult(`
-      💖 ${yourName.toUpperCase()} truly loves themselves! <br>
+      💖 ${yourName.toUpperCase()} Truly Loves Themselves! <br>
       Compatibility: <strong>100%</strong> ❤️
     `);
   }
@@ -93,7 +104,7 @@ function createFloatingHearts() {
 
 function createFloatingSkulls() {
   for (let i = 0; i < 10; i++) {
-      const skull = document.createElement("div");
+    const skull = document.createElement("div");
     skull.classList.add("floating-heart");
     skull.innerHTML = "💀";
     document.body.appendChild(skull);
